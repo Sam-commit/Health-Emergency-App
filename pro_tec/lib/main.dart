@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:pro_tec/screens/create_request.dart';
 import 'package:pro_tec/chat_screen.dart';
 import 'package:pro_tec/personal_chat.dart';
+import 'package:pro_tec/screens/details.dart';
+import 'package:pro_tec/screens/signin.dart';
+import 'package:pro_tec/screens/signup.dart';
 import 'package:pro_tec/widgets/category.dart';
 import 'package:pro_tec/widgets/my_card.dart';
 import 'screens/firstaid.dart';
@@ -10,11 +13,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pro_tec/my_requests.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'new_event.dart';
+
 import 'package:pro_tec/create_request_1.dart';
+
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pro_tec/networking.dart';
-
+import 'screens/firstAidScreens/low_bp.dart';
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 
@@ -58,82 +64,84 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+
       // home: CreateRequest(),
+
 
       theme: ThemeData(
         hintColor: Colors.white
       ),
       home: SafeArea(
         child: Scaffold(
-          body: HomePage(),
+          body: LowBp(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Builder(
-            builder: (context) {
-              return GestureDetector(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateRequest()));
-                },
-                child: Image(
-                  image: AssetImage("images/button.png"),
-                ),
-              );
-            }
-          ),
-          bottomNavigationBar: BottomAppBar(
-            elevation: 5,
-            shape: CircularNotchedRectangle(),
-            color: Color(0xFFFB4B4B),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: FaIcon(FontAwesomeIcons.house)),
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: FaIcon(FontAwesomeIcons.fileSignature))),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: FaIcon(FontAwesomeIcons.solidCommentDots)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: FaIcon(FontAwesomeIcons.briefcaseMedical)),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // floatingActionButton: Builder(
+          //   builder: (context) {
+          //     return GestureDetector(
+          //       onTap: (){
+          //         Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateRequest()));
+          //       },
+          //       child: Image(
+          //         image: AssetImage("images/button.png"),
+          //       ),
+          //     );
+          //   }
+          // ),
+          // bottomNavigationBar: BottomAppBar(
+          //   elevation: 5,
+          //   shape: CircularNotchedRectangle(),
+          //   color: Color(0xFFFB4B4B),
+          //   child: Row(
+          //     mainAxisSize: MainAxisSize.max,
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       Expanded(
+          //         child: Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 30),
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //             children: [
+          //               Padding(
+          //                 padding: const EdgeInsets.all(8.0),
+          //                 child: IconButton(
+          //                     onPressed: () {},
+          //                     icon: FaIcon(FontAwesomeIcons.house)),
+          //               ),
+          //               Padding(
+          //                   padding: const EdgeInsets.all(8.0),
+          //                   child: IconButton(
+          //                       onPressed: () {},
+          //                       icon: FaIcon(FontAwesomeIcons.fileSignature))),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //       Expanded(
+          //         child: Padding(
+          //           padding: const EdgeInsets.symmetric(horizontal: 30),
+          //           child: Row(
+          //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //             children: [
+          //               Padding(
+          //                 padding: const EdgeInsets.all(8.0),
+          //                 child: IconButton(
+          //                     onPressed: () {},
+          //                     icon: FaIcon(FontAwesomeIcons.solidCommentDots)),
+          //               ),
+          //               Padding(
+          //                 padding: const EdgeInsets.all(8.0),
+          //                 child: IconButton(
+          //                     onPressed: () {},
+          //                     icon: FaIcon(FontAwesomeIcons.briefcaseMedical)),
+          //               ),
+          //             ],
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ),
       ),
     );
