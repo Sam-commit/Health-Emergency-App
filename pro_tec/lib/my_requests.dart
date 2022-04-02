@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pro_tec/networking.dart';
+import 'package:pro_tec/widgets/category.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'widgets/my_card.dart';
 
@@ -10,6 +12,18 @@ class MyRequests extends StatefulWidget {
 }
 
 class _MyRequestsState extends State<MyRequests> {
+  List<dynamic> data = [];
+  void tog() {
+    sol();
+  }
+
+  Future sol() async {
+    await log_in("sam@gmail.com", "1234567");
+    data = await get_my_requests();
+  }
+
+  int ind = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,37 +73,47 @@ class _MyRequestsState extends State<MyRequests> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 30),
-                    child:Center(
+                    child: Center(
                       child: ToggleSwitch(
-                        minWidth: MediaQuery.of(context).size.width/3.25,
-                        minHeight: MediaQuery.of(context).size.height/17,
+                        minWidth: MediaQuery.of(context).size.width / 3.25,
+                        minHeight: MediaQuery.of(context).size.height / 17,
                         cornerRadius: 20.0,
-                        activeBgColor:[ Colors.white],
+                        activeBgColor: [Colors.white],
                         activeFgColor: Color(0xFFB32525),
                         inactiveBgColor: Color(0xFFB52626),
                         inactiveFgColor: Colors.grey,
-                        initialLabelIndex: 1,
+                        initialLabelIndex: ind,
                         totalSwitches: 2,
-
                         labels: ['Live Requests', 'Past Requests'],
                         radiusStyle: true,
                         onToggle: (index) {
-                          print('switched to: $index');
+                          setState(() {
+                            ind = index!;
+                          });
+
                         },
                       ),
                     ),
-
-
                   ),
                   Expanded(
                     child: Container(
-                      child: ListView(
-                        children: [
-                          MyCard(),
-                          MyCard(),
-                          MyCard(),
-                          MyCard(),
-                        ],
+                      child: FutureBuilder(
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
+                            return ListView.builder(
+                                itemCount: data[ind].length,
+                                itemBuilder: (context, int index) {
+                                  return MyCard(data: data[ind][index]);
+                                });
+                          }
+
+                          print(snapshot.connectionState);
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                        future: sol(),
                       ),
                     ),
                   )

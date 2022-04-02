@@ -10,7 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pro_tec/my_requests.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'new_event.dart';
-import 'package:pro_tec/create_request.dart';
+import 'package:pro_tec/create_request_1.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pro_tec/networking.dart';
@@ -59,34 +59,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       // home: CreateRequest(),
-      // home: Scaffold(
-      //   body: HomePage(),
-      //     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //     floatingActionButton: FloatingActionButton(
-      //       backgroundColor: Color(0xFFFB4B4B),
-      //       onPressed: () {  },
-      //       child: Icon(Icons.add),
-      //
-      //     ),
-      //   bottomNavigationBar: BottomAppBar(
-      //   elevation:5,
-      //   shape: CircularNotchedRectangle(),
-      //   color: Color(0xFFFB4B4B),
-      //   child: Row(
-      //     mainAxisSize: MainAxisSize.max,
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //
-      //     children: [
-      //       IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.home,size: 35,)),
-      //       IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.news,size: 35,)),
-      //       IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.chat_bubble_text,size: 35,)),
-      //       IconButton(onPressed: (){}, icon: Icon(Icons.medical_services_outlined,size: 35,)),
-      //
-      //
-      //     ],
-      //   ),
-      // ),
-      // ),
+
       theme: ThemeData(
         hintColor: Colors.white
       ),
@@ -95,8 +68,17 @@ class MyApp extends StatelessWidget {
           body: HomePage(),
           floatingActionButtonLocation:
               FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Image(
-            image: AssetImage("images/button.png"),
+          floatingActionButton: Builder(
+            builder: (context) {
+              return GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateRequest()));
+                },
+                child: Image(
+                  image: AssetImage("images/button.png"),
+                ),
+              );
+            }
           ),
           bottomNavigationBar: BottomAppBar(
             elevation: 5,
@@ -169,6 +151,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    //sol();
     var initializationSettingsAndroid =
         new AndroidInitializationSettings('ic_launcher');
     var initialzationSettingsAndroid =
@@ -231,6 +214,14 @@ class _HomePageState extends State<HomePage> {
     print(token);
   }
 
+  List<dynamic>data=[];
+
+  Future sol()async{
+    await log_in("sam@gmail.com","1234567" );
+    data = await get_data();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -290,13 +281,29 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     child: Container(
-                      child: ListView(
-                        children: [
-                          Category(name: "Fund Raising", data: [1, 2, 3, 4]),
-                          Category(name: "Blood ", data: [1, 2, 3, 4]),
-                          Category(name: "Medicine", data: [1, 2, 3, 4]),
-                          Category(name: "Others", data: [1, 2, 3, 4]),
-                        ],
+                      child:FutureBuilder(
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+
+                            return ListView(
+                              children: [
+                                //Category(name: "Fund Raising", data: [1, 2, 3, 4]),
+                                Category(name: "Blood ", data:data[0]),
+                                Category(name: "Medicine", data:data[1]),
+                                Category(name: "Others", data: data[2]),
+                              ],
+                            );
+
+                          }
+
+                          print(snapshot.connectionState);
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+
+
+                        },
+                        future: sol(),
                       ),
                     ),
                   )
@@ -314,8 +321,8 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Color(0xFFFF0000),
             onPressed: () async{
 
-              await log_in("sam@gmail.com","1234567" );
-              await create_request("Praygraj", "Others","None", "2 units", "Need urgently");
+              // await log_in("sam@gmail.com","1234567" );
+              // await create_request("Praygraj", "Others","None", "2 units", "Need urgently");
               //await get_data();
 
             },
@@ -332,3 +339,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
