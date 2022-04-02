@@ -39,15 +39,18 @@ class _FirstAidState extends State<FirstAid> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage:AssetImage("images/img2.jpg"),
-                      ),
-                      SizedBox(width: 10,),
-                      Text("Hi, Samarth",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18),),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 25),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage:AssetImage("images/img2.jpg"),
+                        ),
+                        SizedBox(width: 10,),
+                        Text("Hi, Samarth",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18),),
 
-                    ],
+                      ],
+                    ),
                   ),
                   // Padding(
                   //   padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
@@ -66,7 +69,158 @@ class _FirstAidState extends State<FirstAid> {
                   //     ),
                   //   ),
                   // )
+                  Expanded(
+                    child: GridView(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,),
+                      children: [
+                        GestureDetector(
+                          onTap: (){},
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/1.8,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFBEAEA),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image(image: AssetImage("images/burn.png"),
 
+                                  ),
+                                  Text("Skin Burns",
+                                    style: TextStyle(
+                                        color: Color(0xFFB32525,),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20
+                                    ),
+
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: (){},
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/1.8,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFBEAEA),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image(image: AssetImage("images/lowbp.png"),
+
+                                  ),
+                                  Text("Low BP",
+                                    style: TextStyle(
+                                        color: Color(0xFFB32525,),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20
+                                    ),
+
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ), GestureDetector(
+                          onTap: (){},
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/1.8,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFBEAEA),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image(image: AssetImage("images/fracture.png"),
+
+                                  ),
+                                  Text("Fractures",
+                                    style: TextStyle(
+                                        color: Color(0xFFB32525,),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20
+                                    ),
+
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ), GestureDetector(
+                          onTap: (){},
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/1.8,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFBEAEA),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image(image: AssetImage("images/beesting.png"),
+
+                                  ),
+                                  Text("Bee Sting",
+                                    style: TextStyle(
+                                        color: Color(0xFFB32525,),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20
+                                    ),
+
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ), GestureDetector(
+                          onTap: (){},
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width/1.8,
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFBEAEA),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image(image: AssetImage("images/burn.png"),
+
+                                  ),
+                                  Text("Skin Burns",
+                                    style: TextStyle(
+                                        color: Color(0xFFB32525,),
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 20
+                                    ),
+
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+
+
+
+
+                      ],
+                    ),
+                  )
 
                 ],
               ),

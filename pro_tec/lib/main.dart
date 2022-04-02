@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pro_tec/screens/create_request.dart';
 import 'package:pro_tec/widgets/my_card.dart';
 import 'screens/firstaid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pro_tec/my_requests.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -13,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: FirstAid(),
+      // home: CreateRequest(),
       // home: Scaffold(
       //   body: HomePage(),
       //     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -42,6 +46,72 @@ class MyApp extends StatelessWidget {
       //   ),
       // ),
       // ),
+      home: SafeArea(
+        child: Scaffold(
+          body: HomePage(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: Image(image: AssetImage("images/button.png"),),
+          bottomNavigationBar: BottomAppBar(
+            elevation: 5,
+            shape: CircularNotchedRectangle(),
+            color: Color(0xFFFB4B4B),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: FaIcon(FontAwesomeIcons.house)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: FaIcon(FontAwesomeIcons.fileSignature))
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon:FaIcon(FontAwesomeIcons.solidCommentDots)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(
+                              onPressed: () {},
+                              icon: FaIcon(FontAwesomeIcons.briefcaseMedical)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
@@ -88,18 +158,29 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage:AssetImage("images/img2.jpg"),
+                        backgroundImage: AssetImage("images/img2.jpg"),
                       ),
-                      SizedBox(width: 10,),
-                      Text("Hi, Samarth",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 18),),
-
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "Hi, Samarth",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 18),
+                      ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
-                    child: Text("Live Requests ",style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.bold),),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 30),
+                    child: Text(
+                      "Live Requests ",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
-
                   Expanded(
                     child: Container(
                       child: ListView(
@@ -112,24 +193,28 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   )
-
-
                 ],
               ),
             ),
           ],
         ),
-      floatingActionButton:Padding(
-        padding: const EdgeInsets.only(bottom: 10,),
-        child: FloatingActionButton(
-          elevation: 10,
-          backgroundColor: Color(0xFFFB4B4B),
-          onPressed: () {  },
-          child: Text("SOS",style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(
+            bottom: 10,
+          ),
+          child: FloatingActionButton(
+            elevation: 10,
+            backgroundColor: Color(0xFFFF0000),
+            onPressed: () {},
+            child: Text(
+              "SOS",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
-      ),
-
-
       ),
     );
   }
