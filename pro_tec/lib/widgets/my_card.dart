@@ -15,7 +15,7 @@ class MyCard extends StatelessWidget {
 
         child: Container(
           height: MediaQuery.of(context).size.height/3.75,
-          //width: MediaQuery.of(context).size.width/3,
+          width: MediaQuery.of(context).size.width/1.5,
           child: Column(
             children: [
               Padding(
