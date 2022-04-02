@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pro_tec/chat_screen.dart';
+import 'package:pro_tec/personal_chat.dart';
 import 'package:pro_tec/widgets/category.dart';
 import 'package:pro_tec/widgets/my_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +11,7 @@ import 'new_event.dart';
 import 'package:pro_tec/create_request.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:pro_tec/networking.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -52,6 +55,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        hintColor: Colors.white
+      ),
       home: SafeArea(
         child: Scaffold(
           body: HomePage(),
@@ -139,7 +145,7 @@ class _HomePageState extends State<HomePage> {
         InitializationSettings(android: initialzationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
       RemoteNotification notification = message.notification!;
       AndroidNotification android = message.notification!.android!;
       if (notification != null && android != null) {
@@ -158,10 +164,12 @@ class _HomePageState extends State<HomePage> {
                 icon: "@mipmap/ic_launcher",
               ),
             ));
+
+        await get_data();
       }
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async{
       RemoteNotification notification = message.notification!;
       AndroidNotification android = message.notification!.android!;
       if (notification != null && android != null) {
@@ -178,6 +186,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             });
+        await get_data();
       }
     });
 
@@ -271,7 +280,13 @@ class _HomePageState extends State<HomePage> {
           child: FloatingActionButton(
             elevation: 10,
             backgroundColor: Color(0xFFFF0000),
-            onPressed: () {},
+            onPressed: () async{
+
+              await log_in("sam@gmail.com","1234567" );
+              await create_request("Praygraj", "Others","None", "2 units", "Need urgently");
+              //await get_data();
+
+            },
             child: Text(
               "SOS",
               style: TextStyle(
