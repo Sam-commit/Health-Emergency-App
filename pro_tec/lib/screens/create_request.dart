@@ -58,7 +58,7 @@ class _CreateRequestState extends State<CreateRequest> {
                       // value: _chosenValue,
                       //elevation: 5,
                       style: TextStyle(color: Colors.white),
-                      iconEnabledColor:Colors.black,
+                      iconEnabledColor:Colors.white,
                       items: <String>[
                         'Select what you need',
                         'Blood',
@@ -74,8 +74,8 @@ class _CreateRequestState extends State<CreateRequest> {
                       hint:Text(
                         '$need',
                         style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
+                          color: Colors.white,
+                          fontSize: 20,
                         ),
                       ),
 
@@ -112,7 +112,7 @@ class _CreateRequestState extends State<CreateRequest> {
                       // value: _chosenValue,
                       //elevation: 5,
                       style: TextStyle(color: Colors.white),
-                      iconEnabledColor:Colors.black,
+                      iconEnabledColor:Colors.white,
                       items: <String>[
                         'Type',
                         'A+',
@@ -133,7 +133,7 @@ class _CreateRequestState extends State<CreateRequest> {
                       hint:Text(
                         '$type',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                           fontSize: 14,
                         ),
                       ),
