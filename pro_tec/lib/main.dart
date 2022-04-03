@@ -13,6 +13,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pro_tec/my_requests.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'new_event.dart';
+
+import 'package:pro_tec/create_request_1.dart';
+
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pro_tec/networking.dart';
@@ -163,11 +167,12 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
               ),
-            ],
+            ]
           ),
-        ),
-      ),
+    ),
+    )
     );
+
   }
 }
 
@@ -183,6 +188,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    //sol();
     var initializationSettingsAndroid =
         new AndroidInitializationSettings('ic_launcher');
     var initialzationSettingsAndroid =
@@ -245,6 +251,14 @@ class _HomePageState extends State<HomePage> {
     print(token);
   }
 
+  List<dynamic>data=[];
+
+  Future sol()async{
+    await log_in("sam@gmail.com","1234567" );
+    data = await get_data();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -304,13 +318,29 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     child: Container(
-                      child: ListView(
-                        children: [
-                          Category(name: "Fund Raising", data: [1, 2, 3, 4]),
-                          Category(name: "Blood ", data: [1, 2, 3, 4]),
-                          Category(name: "Medicine", data: [1, 2, 3, 4]),
-                          Category(name: "Others", data: [1, 2, 3, 4]),
-                        ],
+                      child:FutureBuilder(
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.done) {
+
+                            return ListView(
+                              children: [
+                                //Category(name: "Fund Raising", data: [1, 2, 3, 4]),
+                                Category(name: "Blood ", data:data[0]),
+                                Category(name: "Medicine", data:data[1]),
+                                Category(name: "Others", data: data[2]),
+                              ],
+                            );
+
+                          }
+
+                          print(snapshot.connectionState);
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+
+
+                        },
+                        future: sol(),
                       ),
                     ),
                   )
@@ -328,8 +358,8 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Color(0xFFFF0000),
             onPressed: () async{
 
-              await log_in("sam@gmail.com","1234567" );
-              await create_request("Praygraj", "Others","None", "2 units", "Need urgently");
+              // await log_in("sam@gmail.com","1234567" );
+              // await create_request("Praygraj", "Others","None", "2 units", "Need urgently");
               //await get_data();
 
             },
@@ -346,3 +376,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+

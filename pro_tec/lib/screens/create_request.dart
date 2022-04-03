@@ -10,68 +10,75 @@ class CreateRequest extends StatefulWidget {
 }
 
 class _CreateRequestState extends State<CreateRequest> {
-  int count=0;
-  String need='Select what you need',type="Type";
+  int count = 0;
+  String need = 'Select what you need', type = "Type";
+  String location = "";
+  String description = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.only(top: 25,),
+        padding: const EdgeInsets.only(
+          top: 25,
+        ),
         child: Column(
           children: [
             Row(
               children: [
-                ElevatedButton(onPressed: (){}, child: Icon(Icons.arrow_back),
-                style: ButtonStyle(
-
-                  shape: MaterialStateProperty.all(CircleBorder()),
-                  backgroundColor: MaterialStateProperty.all(Color(0xFFFF5E5E)), // <-- Button color
-
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Icon(Icons.arrow_back),
+                  style: ButtonStyle(
+                    shape: MaterialStateProperty.all(CircleBorder()),
+                    backgroundColor: MaterialStateProperty.all(
+                        Color(0xFFFF5E5E)), // <-- Button color
+                  ),
                 ),
+                Text(
+                  "Create a request",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                Text("Create a request",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
-
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 25,bottom: 10,left: 20,right: 20),
+              padding: const EdgeInsets.only(
+                  top: 25, bottom: 10, left: 20, right: 20),
               child: Container(
                 height: 50,
                 child: DecoratedBox(
-
                   decoration: ShapeDecoration(
-
-                      color: Color(0xFFFF6A6A), shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      // side: BorderSide()
-                  )
-                  ),
-
+                      color: Color(0xFFFF6A6A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        // side: BorderSide()
+                      )),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 15,top: 8,bottom: 8,right: 15),
+                    padding: const EdgeInsets.only(
+                        left: 15, top: 8, bottom: 8, right: 15),
                     child: DropdownButton<String>(
-
                       isExpanded: true,
-                      focusColor:Colors.white,
+                      focusColor: Colors.white,
                       // value: _chosenValue,
                       //elevation: 5,
                       style: TextStyle(color: Colors.white),
-                      iconEnabledColor:Colors.white,
+                      iconEnabledColor: Colors.white,
                       items: <String>[
                         'Select what you need',
                         'Blood',
                         'Medicine',
                         'Others',
-
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value,style:TextStyle(color:Colors.black),),
+                          child: Text(
+                            value,
+                            style: TextStyle(color: Colors.black),
+                          ),
                         );
                       }).toList(),
-                      hint:Text(
+                      hint: Text(
                         '$need',
                         style: TextStyle(
                           color: Colors.white,
@@ -89,65 +96,67 @@ class _CreateRequestState extends State<CreateRequest> {
                 ),
               ),
             ),
-            need=='Blood'? Padding(
-              padding: const EdgeInsets.only(top: 25,bottom: 10,left: 20,right: 20),
-              child: Container(
-                height: 50,
-                child: DecoratedBox(
+            need == 'Blood'
+                ? Padding(
+                    padding: const EdgeInsets.only(
+                        top: 25, bottom: 10, left: 20, right: 20),
+                    child: Container(
+                      height: 50,
+                      child: DecoratedBox(
+                        decoration: ShapeDecoration(
+                            color: Color(0xFFFF6A6A),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              // side: BorderSide()
+                            )),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              left: 15, top: 8, bottom: 8, right: 15),
+                          child: DropdownButton<String>(
+                            isExpanded: true,
+                            focusColor: Colors.white,
+                            // value: _chosenValue,
+                            //elevation: 5,
+                            style: TextStyle(color: Colors.white),
+                            iconEnabledColor: Colors.white,
+                            items: <String>[
+                              'Type',
+                              'A+',
+                              'B+',
+                              'O+',
+                              'AB+',
+                              'A-',
+                              'B-',
+                              'O-',
+                              'AB-'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              );
+                            }).toList(),
+                            hint: Text(
+                              '$type',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
 
-                  decoration: ShapeDecoration(
-
-                      color: Color(0xFFFF6A6A), shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5),
-                      // side: BorderSide()
-                  )
-                  ),
-
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 15,top: 8,bottom: 8,right: 15),
-                    child: DropdownButton<String>(
-
-                      isExpanded: true,
-                      focusColor:Colors.white,
-                      // value: _chosenValue,
-                      //elevation: 5,
-                      style: TextStyle(color: Colors.white),
-                      iconEnabledColor:Colors.white,
-                      items: <String>[
-                        'Type',
-                        'A+',
-                        'B+',
-                        'O+',
-                        'AB+',
-                        'A-',
-                        'B-',
-                        'O-',
-                        'AB-'
-
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value,style:TextStyle(color:Colors.black),),
-                        );
-                      }).toList(),
-                      hint:Text(
-                        '$type',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
+                            onChanged: (String? value) {
+                              setState(() {
+                                type = value!;
+                              });
+                            },
+                          ),
                         ),
                       ),
-
-                      onChanged: (String? value) {
-                        setState(() {
-                          type = value!;
-                        });
-                      },
                     ),
-                  ),
-                ),
-              ),
-            ):Container(),
+                  )
+                : Container(),
 
             // Padding(
             //   padding: const EdgeInsets.only(left: 20,right: 20),
@@ -157,126 +166,137 @@ class _CreateRequestState extends State<CreateRequest> {
             //   ],),
             // ),
             Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 15),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
               child: Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Color(0xFFFF6A6A)
+                    borderRadius: BorderRadius.circular(5),
+                    color: Color(0xFFFF6A6A)),
+                child: TextFormField(
+                  onChanged: (value) {
+                    location = value;
+                  },
+                  initialValue: "  Enter Location",
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
                 ),
-                child:TextFormField(
-                    initialValue: "  Select Location",
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-                )
-                ,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
               child: Container(
-                height: MediaQuery.of(context).size.height/4.5,
+                height: MediaQuery.of(context).size.height / 4.5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
-                    color: Color(0xFFFF6A6A)
-                ),
-                child:TextFormField(
+                    color: Color(0xFFFF6A6A)),
+                child: TextFormField(
+                  onChanged: (value) {
+                    description = value;
+                  },
                   initialValue: "  Description",
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
-                )
-                ,
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20,top: 20),
+              padding: const EdgeInsets.only(left: 20, top: 20),
               child: Align(
-                alignment: Alignment.topLeft,
-                  child: Text("Quantity",style: TextStyle(fontSize: 22,color: Color(0xFFA93434),fontWeight: FontWeight.bold),)),
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Quantity",
+                    style: TextStyle(
+                        fontSize: 22,
+                        color: Color(0xFFA93434),
+                        fontWeight: FontWeight.bold),
+                  )),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20,top: 20,right: 20),
+              padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
               child: Row(
                 children: [
                   Image.asset("images/unit.png"),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width/20,
+                    width: MediaQuery.of(context).size.width / 20,
                   ),
-                  Text("$count Units",style: TextStyle(fontSize: 20,color: Color(0xFFA93434),fontWeight: FontWeight.bold),),
+                  Text(
+                    "$count Units",
+                    style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xFFA93434),
+                        fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width/2.8,
+                    width: MediaQuery.of(context).size.width / 2.8,
                   ),
                   ConstrainedBox(
-                    constraints: const BoxConstraints.tightFor(width: 40, height: 40),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFFF56666),
-
-                          borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: IconButton(
-                        icon: Icon(Icons.add,color: Colors.white,), onPressed: () {
-                          count++;
-                          setState(() {
-
-                          });
-                      },
-                      ),
-                    )
-                  ),
-                 SizedBox(
-                   width: 8,
-                 ),
-                  ConstrainedBox(
-                      constraints: const BoxConstraints.tightFor(width: 40, height: 40),
+                      constraints:
+                          const BoxConstraints.tightFor(width: 40, height: 40),
                       child: Container(
                         decoration: BoxDecoration(
                             color: Color(0xFFF56666),
-
-                            borderRadius: BorderRadius.circular(5)
-                        ),
+                            borderRadius: BorderRadius.circular(5)),
                         child: IconButton(
-                          icon: Icon(FontAwesomeIcons.minus,color: Colors.white,), onPressed: () {
-                            if(count==0)
-                              count=0;
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            count++;
+                            setState(() {});
+                          },
+                        ),
+                      )),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  ConstrainedBox(
+                      constraints:
+                          const BoxConstraints.tightFor(width: 40, height: 40),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFF56666),
+                            borderRadius: BorderRadius.circular(5)),
+                        child: IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.minus,
+                            color: Colors.white,
+                          ),
+                          onPressed: () {
+                            if (count == 0)
+                              count = 0;
                             else
                               count--;
 
-                            setState(() {
-
-                            });
-                        },
+                            setState(() {});
+                          },
                         ),
-                      )
-                  ),
-
-                  
+                      )),
                 ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 25.0),
               child: ElevatedButton(
-                onPressed: (){},
+                onPressed: () {},
                 child: SizedBox(
-                  width: MediaQuery.of(context).size.width/1.5,
-
-
+                    width: MediaQuery.of(context).size.width / 1.5,
                     child: Padding(
-                      padding: const EdgeInsets.all(15 ),
-                      child: Center(child: Text("Create Request",style: TextStyle(fontSize: 20),)),
+                      padding: const EdgeInsets.all(15),
+                      child: Center(
+                          child: Text(
+                        "Create Request",
+                        style: TextStyle(fontSize: 20),
+                      )),
                     )),
                 style: ButtonStyle(
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-    RoundedRectangleBorder(
-    borderRadius: BorderRadius.circular(5.0),
-    )
-    ),
-    backgroundColor: MaterialStateProperty.all(Color(0xFFFB4B4B)),
-
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  )),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFFFB4B4B)),
                 ),
-
               ),
             ),
           ],

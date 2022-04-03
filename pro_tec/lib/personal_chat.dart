@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:pro_tec/networking.dart';
 
 class PersonalChat extends StatefulWidget {
-  const PersonalChat({Key? key}) : super(key: key);
+
+  PersonalChat({required this.id,required this.user_id});
+
+  String id;
+  String user_id;
 
   @override
   _PersonalChatState createState() => _PersonalChatState();
 }
 
 class _PersonalChatState extends State<PersonalChat> {
+
+  List<dynamic>data=[];
+  String message="";
+
+  Future sol()async{
+
+    data= await get_chat(widget.id);
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -33,12 +48,43 @@ class _PersonalChatState extends State<PersonalChat> {
                   borderRadius: BorderRadius.circular(15)
                 ),
 
+                child: FutureBuilder(
+                  builder: (context, snapshots) {
+                    if (snapshots.connectionState == ConnectionState.done) {
+                      return ListView.builder(
+                          itemCount: data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: (data[index]["byId"] == widget.user_id) ? Colors.blue : Colors.white,
+                                    borderRadius: BorderRadius.circular(10)
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 8),
+                                  child: Text(data[index]["text"],style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
+                                ),
+                              ),
+                            );
+                          });
+                    }
+
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                  future: sol(),
+                ),
 
               ),
             )),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                onChanged: (value){
+                  message = value;
+                },
                   decoration: InputDecoration(
                     hintText: "Type text here ...",
                     filled: true,
@@ -48,7 +94,10 @@ class _PersonalChatState extends State<PersonalChat> {
                     ),
                 suffixIcon: IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: (){}
+                  onPressed: ()async{
+                    await send_chat(widget.user_id, message);
+                    setState(() {});
+                  }
                 ),
               )
               ),
