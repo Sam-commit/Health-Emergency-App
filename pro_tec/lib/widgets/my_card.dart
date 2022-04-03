@@ -4,11 +4,10 @@ import 'package:pro_tec/personal_chat.dart';
 
 class MyCard extends StatelessWidget {
 
-  MyCard({required this.data});
-
-
+  MyCard({required this.data,required this.show});
 
   Map<dynamic,dynamic>data;
+  int show ;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,11 @@ class MyCard extends StatelessWidget {
       child: GestureDetector(
 
         onTap: (){
+          if(show==1)
           showDialog(builder: (context)=>AlertBox(data: data,),context: context);
+          else {
+            showDialog(builder: (context)=>AlertBox2(data: data,),context: context);
+          }
         },
 
         child: Card(
@@ -169,6 +172,27 @@ class AlertBox extends StatelessWidget {
           ],
         ),
       ) ,
+    );
+  }
+}
+
+class AlertBox2 extends StatelessWidget {
+
+  AlertBox2({required this.data});
+
+  Map<dynamic,dynamic>data;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title:Text("Mark the Request Complete ? "),
+      actions: [
+        TextButton(onPressed: ()async{
+          await update_request(data["_id"]);
+          Navigator.pop(context);
+        }, child:Text("YES")),
+        TextButton(onPressed: (){Navigator.pop(context);}, child:Text("NO"))
+      ],
     );
   }
 }

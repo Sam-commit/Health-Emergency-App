@@ -14,6 +14,13 @@ class PersonalChat extends StatefulWidget {
 
 class _PersonalChatState extends State<PersonalChat> {
 
+  final fieldText = TextEditingController();
+
+  void clearText() {
+    fieldText.clear();
+  }
+
+
   List<dynamic>data=[];
   String message="";
 
@@ -85,6 +92,7 @@ class _PersonalChatState extends State<PersonalChat> {
                 onChanged: (value){
                   message = value;
                 },
+                  controller: fieldText,
                   decoration: InputDecoration(
                     hintText: "Type text here ...",
                     filled: true,
@@ -96,6 +104,7 @@ class _PersonalChatState extends State<PersonalChat> {
                   icon: Icon(Icons.send),
                   onPressed: ()async{
                     await send_chat(widget.user_id, message);
+                    clearText();
                     setState(() {});
                   }
                 ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pro_tec/main.dart';
+import 'package:pro_tec/screens/signin.dart';
+import 'package:pro_tec/networking.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -98,9 +101,10 @@ class _SignUpState extends State<SignUp> {
 
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0,right: 20,top: 18),
-                      child: ElevatedButton(onPressed: (){
+                      child: ElevatedButton(onPressed: ()async{
 
-
+                          await sign_up(name, email, password);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
 
                       },
                           style: ButtonStyle(
@@ -112,9 +116,9 @@ class _SignUpState extends State<SignUp> {
                             backgroundColor: MaterialStateProperty.all(Color(0xFFFF2626)),
                           ),
                           child: SizedBox(
-                              height: 60,
+                              height: 50,
                               width: MediaQuery.of(context).size.width/1.2,
-                              child: Center(child: Text("Next",style: TextStyle(
+                              child: Center(child: Text("Sign Up",style: TextStyle(
                                 fontSize: 28,
                               ),)))),
                     ),
@@ -122,7 +126,11 @@ class _SignUpState extends State<SignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Already have an account?"),
-                        TextButton(onPressed: (){}, child: Text(" Sign In",style: TextStyle(color:Color(0xFFFC6464) ),)),
+                        TextButton(onPressed: (){
+
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SignIn()));
+
+                        }, child: Text(" Sign In",style: TextStyle(color:Color(0xFFFC6464) ),)),
                       ],
                     )
 

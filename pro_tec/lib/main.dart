@@ -15,12 +15,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'new_event.dart';
 
 import 'package:pro_tec/create_request_1.dart';
-
+import 'screens/signin.dart';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pro_tec/networking.dart';
 import 'screens/firstAidScreens/low_bp.dart';
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 
@@ -48,10 +49,8 @@ void main() async {
     debugShowCheckedModeBanner: false,
     // home: LowBp(),
 
-    theme: ThemeData(
-        hintColor: Colors.white
-    ),
-    home: MyApp(),
+    theme: ThemeData(hintColor: Colors.white),
+    home: SignIn(),
   ));
 }
 
@@ -65,8 +64,6 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -75,28 +72,28 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int current_screen=0;
-  List<dynamic> screens  = [
-    HomePage(),
-    MyRequests(),
-    ChatScreen(),
-    FirstAid()
-  ];
+  int current_screen = 0;
+  List<dynamic> screens = [HomePage(), MyRequests(), ChatScreen(), FirstAid()];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: screens[current_screen],
-        floatingActionButtonLocation:
-        FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: Image(
+        child: Scaffold(
+      body: screens[current_screen],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CreateRequest()));
+        },
+        child: Image(
           image: AssetImage("images/button.png"),
         ),
-        bottomNavigationBar: BottomAppBar(
-          elevation: 5,
-          shape: CircularNotchedRectangle(),
-          color: Color(0xFFFB4B4B),
-          child: Row(
+      ),
+      bottomNavigationBar: BottomAppBar(
+        elevation: 5,
+        shape: CircularNotchedRectangle(),
+        color: Color(0xFFFB4B4B),
+        child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -109,25 +106,28 @@ class _MyAppState extends State<MyApp> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: IconButton(
-                            onPressed: () {
-                              current_screen=0;
-                              setState(() {
-
-                              });
-                            },
-                            icon: FaIcon(FontAwesomeIcons.house),color: (current_screen==0) ? Colors.white : Colors.black,),
+                          onPressed: () {
+                            current_screen = 0;
+                            setState(() {});
+                          },
+                          icon: FaIcon(FontAwesomeIcons.house),
+                          color: (current_screen == 0)
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                       ),
                       Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
-                              onPressed: () {
-                                current_screen=1;
-                                setState(() {
-
-                                });
-
-                              },
-                              icon: FaIcon(FontAwesomeIcons.fileSignature),color: (current_screen==1) ? Colors.white : Colors.black,)),
+                            onPressed: () {
+                              current_screen = 1;
+                              setState(() {});
+                            },
+                            icon: FaIcon(FontAwesomeIcons.fileSignature),
+                            color: (current_screen == 1)
+                                ? Colors.white
+                                : Colors.black,
+                          )),
                     ],
                   ),
                 ),
@@ -141,41 +141,38 @@ class _MyAppState extends State<MyApp> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: IconButton(
-                            onPressed: () {
-                              current_screen=2;
-                              setState(() {
-
-                              });
-
-                            },
-                            icon: FaIcon(FontAwesomeIcons.solidCommentDots),color: (current_screen==2) ? Colors.white : Colors.black,),
+                          onPressed: () {
+                            current_screen = 2;
+                            setState(() {});
+                          },
+                          icon: FaIcon(FontAwesomeIcons.solidCommentDots),
+                          color: (current_screen == 2)
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: IconButton(
-                            onPressed: () {
-                              current_screen=3;
-                              setState(() {
-
-                              });
-
-
-                            },
-                            icon: FaIcon(FontAwesomeIcons.briefcaseMedical),color: (current_screen==3) ? Colors.white : Colors.black,),
+                          onPressed: () {
+                            current_screen = 3;
+                            setState(() {});
+                          },
+                          icon: FaIcon(FontAwesomeIcons.briefcaseMedical),
+                          color: (current_screen == 3)
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-            ]
-          ),
-    ),
-    )
-    );
-
+            ]),
+      ),
+    ));
   }
 }
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -186,6 +183,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+
+  String token = "";
   void initState() {
     super.initState();
     //sol();
@@ -197,7 +196,7 @@ class _HomePageState extends State<HomePage> {
         InitializationSettings(android: initialzationSettingsAndroid);
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async{
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       RemoteNotification notification = message.notification!;
       AndroidNotification android = message.notification!.android!;
       if (notification != null && android != null) {
@@ -217,11 +216,13 @@ class _HomePageState extends State<HomePage> {
               ),
             ));
 
-        await get_data();
+        setState(() {
+
+        });
       }
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async{
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       RemoteNotification notification = message.notification!;
       AndroidNotification android = message.notification!.android!;
       if (notification != null && android != null) {
@@ -238,25 +239,26 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             });
-        await get_data();
+        setState(() {
+
+        });
       }
     });
 
     getToken();
   }
 
-  String token = "";
+
   getToken() async {
     token = (await FirebaseMessaging.instance.getToken())!;
     print(token);
   }
 
-  List<dynamic>data=[];
+  List<dynamic> data = [];
 
-  Future sol()async{
-    await log_in("sam@gmail.com","1234567" );
-    data = await get_data();
-
+  Future sol() async {
+    await log_in("sam@gmail.com", "1234567");
+    data = await get_data(token);
   }
 
   @override
@@ -318,27 +320,24 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     child: Container(
-                      child:FutureBuilder(
+                      child: FutureBuilder(
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.done) {
-
+                          if (snapshot.connectionState ==
+                              ConnectionState.done) {
                             return ListView(
                               children: [
                                 //Category(name: "Fund Raising", data: [1, 2, 3, 4]),
-                                Category(name: "Blood ", data:data[0]),
-                                Category(name: "Medicine", data:data[1]),
+                                Category(name: "Blood ", data: data[0]),
+                                Category(name: "Medicine", data: data[1]),
                                 Category(name: "Others", data: data[2]),
                               ],
                             );
-
                           }
 
                           print(snapshot.connectionState);
                           return Center(
                             child: CircularProgressIndicator(),
                           );
-
-
                         },
                         future: sol(),
                       ),
@@ -356,12 +355,10 @@ class _HomePageState extends State<HomePage> {
           child: FloatingActionButton(
             elevation: 10,
             backgroundColor: Color(0xFFFF0000),
-            onPressed: () async{
-
+            onPressed: () async {
               // await log_in("sam@gmail.com","1234567" );
               // await create_request("Praygraj", "Others","None", "2 units", "Need urgently");
               //await get_data();
-
             },
             child: Text(
               "SOS",
@@ -376,5 +373,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-

@@ -104,7 +104,7 @@ class _MyRequestsState extends State<MyRequests> {
                             return ListView.builder(
                                 itemCount: data[ind].length,
                                 itemBuilder: (context, int index) {
-                                  return MyCard(data: data[ind][index]);
+                                  return MyCard(data: data[ind][index],show: 0,);
                                 });
                           }
 
