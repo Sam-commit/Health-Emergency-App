@@ -40,7 +40,15 @@ void main() async {
     badge: true,
     sound: true,
   );
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    // home: LowBp(),
+
+    theme: ThemeData(
+        hintColor: Colors.white
+    ),
+    home: MyApp(),
+  ));
 }
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -53,112 +61,116 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-class MyApp extends StatelessWidget {
+
+
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int current_screen=0;
+  List<dynamic> screens  = [
+    HomePage(),
+    MyRequests(),
+    ChatScreen(),
+    FirstAid()
+  ];
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      // home: LowBp(),
-      // home: Scaffold(
-      //   body: HomePage(),
-      //     floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //     floatingActionButton: FloatingActionButton(
-      //       backgroundColor: Color(0xFFFB4B4B),
-      //       onPressed: () {  },
-      //       child: Icon(Icons.add),
-      //
-      //     ),
-      //   bottomNavigationBar: BottomAppBar(
-      //   elevation:5,
-      //   shape: CircularNotchedRectangle(),
-      //   color: Color(0xFFFB4B4B),
-      //   child: Row(
-      //     mainAxisSize: MainAxisSize.max,
-      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //
-      //     children: [
-      //       IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.home,size: 35,)),
-      //       IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.news,size: 35,)),
-      //       IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.chat_bubble_text,size: 35,)),
-      //       IconButton(onPressed: (){}, icon: Icon(Icons.medical_services_outlined,size: 35,)),
-      //
-      //
-      //     ],
-      //   ),
-      // ),
-      // ),
-      theme: ThemeData(
-        hintColor: Colors.white
-      ),
-      home: SafeArea(
-        child: Scaffold(
-          body: HomePage(),
-          floatingActionButtonLocation:
-              FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: Image(
-            image: AssetImage("images/button.png"),
-          ),
-          bottomNavigationBar: BottomAppBar(
-            elevation: 5,
-            shape: CircularNotchedRectangle(),
-            color: Color(0xFFFB4B4B),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
+    return SafeArea(
+      child: Scaffold(
+        body: screens[current_screen],
+        floatingActionButtonLocation:
+        FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: Image(
+          image: AssetImage("images/button.png"),
+        ),
+        bottomNavigationBar: BottomAppBar(
+          elevation: 5,
+          shape: CircularNotchedRectangle(),
+          color: Color(0xFFFB4B4B),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: IconButton(
+                            onPressed: () {
+                              current_screen=0;
+                              setState(() {
+
+                              });
+                            },
+                            icon: FaIcon(FontAwesomeIcons.house),color: (current_screen==0) ? Colors.white : Colors.black,),
+                      ),
+                      Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
-                              onPressed: () {},
-                              icon: FaIcon(FontAwesomeIcons.house)),
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: FaIcon(FontAwesomeIcons.fileSignature))),
-                      ],
-                    ),
+                              onPressed: () {
+                                current_screen=1;
+                                setState(() {
+
+                                });
+
+                              },
+                              icon: FaIcon(FontAwesomeIcons.fileSignature),color: (current_screen==1) ? Colors.white : Colors.black,)),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: FaIcon(FontAwesomeIcons.solidCommentDots)),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: IconButton(
-                              onPressed: () {},
-                              icon: FaIcon(FontAwesomeIcons.briefcaseMedical)),
-                        ),
-                      ],
-                    ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: IconButton(
+                            onPressed: () {
+                              current_screen=2;
+                              setState(() {
+
+                              });
+
+                            },
+                            icon: FaIcon(FontAwesomeIcons.solidCommentDots),color: (current_screen==2) ? Colors.white : Colors.black,),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: IconButton(
+                            onPressed: () {
+                              current_screen=3;
+                              setState(() {
+
+                              });
+
+
+                            },
+                            icon: FaIcon(FontAwesomeIcons.briefcaseMedical),color: (current_screen==3) ? Colors.white : Colors.black,),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
