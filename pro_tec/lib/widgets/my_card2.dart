@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pro_tec/networking.dart';
 import 'package:pro_tec/personal_chat.dart';
+import 'package:pro_tec/screens/fund_request.dart';
 
 class MyFCard extends StatelessWidget {
 
@@ -16,11 +17,12 @@ class MyFCard extends StatelessWidget {
       child: GestureDetector(
 
         onTap: (){
-          if(show==1)
-            showDialog(builder: (context)=>AlertBox(data: data,),context: context);
-          else {
-            showDialog(builder: (context)=>AlertBox2(data: data,),context: context);
-          }
+          // if(show==1)
+          //   showDialog(builder: (context)=>AlertBox(data: data,),context: context);
+          // else {
+          //   showDialog(builder: (context)=>AlertBox2(data: data,),context: context);
+          // }
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>FundRequest()));
         },
 
         child: Card(
