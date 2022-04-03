@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pro_tec/first_screen.dart';
 import 'package:pro_tec/screens/create_request.dart';
 import 'package:pro_tec/chat_screen.dart';
 import 'package:pro_tec/personal_chat.dart';
@@ -51,7 +52,7 @@ void main() async {
     // home: LowBp(),
 
     theme: ThemeData(hintColor: Colors.white),
-    home:MyApp(),
+    home:FirstScreen(),
   ));
 }
 

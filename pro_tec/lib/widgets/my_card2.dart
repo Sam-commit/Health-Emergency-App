@@ -22,7 +22,7 @@ class MyFCard extends StatelessWidget {
           // else {
           //   showDialog(builder: (context)=>AlertBox2(data: data,),context: context);
           // }
-          Navigator.push(context,MaterialPageRoute(builder: (context)=>FundRequest()));
+          Navigator.push(context,MaterialPageRoute(builder: (context)=>FundRequest(data: data,)));
         },
 
         child: Card(

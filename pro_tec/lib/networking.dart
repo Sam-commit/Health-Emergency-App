@@ -280,9 +280,23 @@ Future raise_funds(String amount,String description,String link,String name) asy
       }));
 
   print(response.body);
+
+  await send_notif(description);
   // var temp = json.decode(response.body);
   // String chat_id = temp["chat"]["_id"];
   //
   // return chat_id;
 }
 
+Future update_fund(String id,int amount) async {
+  //print(token);
+  http.Response response = await http.patch(
+      Uri.parse(
+          "https://clumsy-coders-hint.herokuapp.com/requests/updateRequest"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({"id": id, "completedAmount": amount}));
+      print(response.body);
+}
