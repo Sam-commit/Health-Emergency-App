@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pro_tec/main.dart';
+import 'package:pro_tec/networking.dart';
+import 'package:pro_tec/screens/signup.dart';
+
+
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
@@ -63,9 +68,10 @@ children: [
   ),
              Padding(
                padding: const EdgeInsets.only(left: 20.0,right: 20,),
-               child: ElevatedButton(onPressed: (){
+               child: ElevatedButton(onPressed: ()async{
 
-
+                  await log_in(email, password);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
 
                },
                    style: ButtonStyle(
@@ -87,7 +93,11 @@ children: [
                mainAxisAlignment: MainAxisAlignment.center,
                children: [
                  Text("Not a member?"),
-                 TextButton(onPressed: (){}, child: Text("Register Now",style: TextStyle(color:Color(0xFFFC6464) ),)),
+                 TextButton(onPressed: (){
+
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUp()));
+
+                 }, child: Text("Register Now",style: TextStyle(color:Color(0xFFFC6464) ),)),
                ],
              )
 

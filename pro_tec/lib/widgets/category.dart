@@ -32,7 +32,7 @@ class _CategoryState extends State<Category> {
             child: ListView.builder(
               itemCount: widget.data.length,
               itemBuilder: (BuildContext context,int index){
-                return MyCard(data: widget.data[index],);
+                return MyCard(data: widget.data[index],show: 1,);
               },
               scrollDirection: Axis.horizontal,
 
