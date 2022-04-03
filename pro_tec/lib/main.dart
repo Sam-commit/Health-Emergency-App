@@ -21,6 +21,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:pro_tec/networking.dart';
 import 'screens/firstAidScreens/low_bp.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -83,7 +84,7 @@ class _MyAppState extends State<MyApp> {
       floatingActionButton: GestureDetector(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CreateRequest()));
+              MaterialPageRoute(builder: (context) => NewEvent()));
         },
         child: Image(
           image: AssetImage("images/button.png"),
@@ -326,10 +327,12 @@ class _HomePageState extends State<HomePage> {
                               ConnectionState.done) {
                             return ListView(
                               children: [
-                                //Category(name: "Fund Raising", data: [1, 2, 3, 4]),
+
                                 Category(name: "Blood ", data: data[0]),
                                 Category(name: "Medicine", data: data[1]),
+                                Category(name: "Fund Raising", data: data[3]),
                                 Category(name: "Others", data: data[2]),
+
                               ],
                             );
                           }
@@ -356,9 +359,7 @@ class _HomePageState extends State<HomePage> {
             elevation: 10,
             backgroundColor: Color(0xFFFF0000),
             onPressed: () async {
-              // await log_in("sam@gmail.com","1234567" );
-              // await create_request("Praygraj", "Others","None", "2 units", "Need urgently");
-              //await get_data();
+              launch("tel://102");
             },
             child: Text(
               "SOS",

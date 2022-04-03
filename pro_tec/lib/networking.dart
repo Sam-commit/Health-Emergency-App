@@ -82,12 +82,14 @@ Future get_data(String fid) async {
   List<dynamic> blood = [];
   List<dynamic> medicine = [];
   List<dynamic> others = [];
+  List<dynamic> funds = [];
 
   for (var i in data) {
     if (i["needed"] == "Blood")
       blood.add(i);
     else if (i["needed"] == "Medicine")
       medicine.add(i);
+    else if(i["needed"]=="Fund Raiser")funds.add(i);
     else
       others.add(i);
   }
@@ -106,6 +108,7 @@ Future get_data(String fid) async {
   data2.add(blood);
   data2.add(medicine);
   data2.add(others);
+  data2.add(funds);
   //
   return data2;
 }
@@ -258,3 +261,28 @@ Future update_request(String id) async {
   List<dynamic> data = json.decode(response.body);
   return data;
 }
+
+Future raise_funds(String amount,String description,String link,String name) async {
+
+  print("Hello");
+  http.Response response = await http.post(
+      Uri.parse("https://clumsy-coders-hint.herokuapp.com/requests/addRequest"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({
+        "title" : name,
+        "driveLink": link,
+        "needed": "Fund Raiser",
+        "quantity": amount,
+        "description": description
+      }));
+
+  print(response.body);
+  // var temp = json.decode(response.body);
+  // String chat_id = temp["chat"]["_id"];
+  //
+  // return chat_id;
+}
+
