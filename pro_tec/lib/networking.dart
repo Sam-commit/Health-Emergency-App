@@ -211,3 +211,16 @@ Future send_chat(String id,String message) async {
   //
   // return chat_id;
 }
+
+Future get_user_chat() async {
+
+  //print(token);
+  http.Response response = await http.get(
+      Uri.parse("https://clumsy-coders-hint.herokuapp.com/users/getChats"),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      });
+  List<dynamic>data= json.decode(response.body);
+  return data;
+}
