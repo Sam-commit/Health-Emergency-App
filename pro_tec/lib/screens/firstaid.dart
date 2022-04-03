@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pro_tec/screens/firstAidScreens/bee_sting.dart';
+import 'package:pro_tec/screens/firstAidScreens/burns.dart';
+import 'package:pro_tec/screens/firstAidScreens/drowning.dart';
+import 'package:pro_tec/screens/firstAidScreens/fractures.dart';
+import 'package:pro_tec/screens/firstAidScreens/low_bp.dart';
 class FirstAid extends StatefulWidget {
   const FirstAid({Key? key}) : super(key: key);
 
@@ -73,7 +78,9 @@ class _FirstAidState extends State<FirstAid> {
                     child: GridView(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,),
                       children: [
                         GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Burns()));
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
@@ -102,7 +109,10 @@ class _FirstAidState extends State<FirstAid> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>LowBp()));
+
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
@@ -130,7 +140,10 @@ class _FirstAidState extends State<FirstAid> {
                             ),
                           ),
                         ), GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Fractures()));
+
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
@@ -158,7 +171,10 @@ class _FirstAidState extends State<FirstAid> {
                             ),
                           ),
                         ), GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>BeeSting()));
+
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
@@ -186,7 +202,10 @@ class _FirstAidState extends State<FirstAid> {
                             ),
                           ),
                         ), GestureDetector(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Drowning()));
+
+                          },
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
@@ -198,10 +217,10 @@ class _FirstAidState extends State<FirstAid> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Image(image: AssetImage("images/burn.png"),
+                                  Image(image: AssetImage("images/drowning.png"),
 
                                   ),
-                                  Text("Skin Burns",
+                                  Text("Drowning",
                                     style: TextStyle(
                                         color: Color(0xFFB32525,),
                                         fontWeight: FontWeight.w600,
