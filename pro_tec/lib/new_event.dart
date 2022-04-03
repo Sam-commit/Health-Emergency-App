@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pro_tec/fund_raising.dart';
+import 'package:pro_tec/screens/create_request.dart';
 
 class NewEvent extends StatefulWidget {
   const NewEvent({Key? key}) : super(key: key);
@@ -61,77 +63,84 @@ class _NewEventState extends State<NewEvent> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    // height: MediaQuery.of(context).size.height / 3,
-                    // width: MediaQuery.of(context).size.width / 2,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Color(0xFFFBEAEA),
-                      border: Border.all(color: Color(0xFFFF5E5E))
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 30),
-                      child: Row(
-                        children: [
-                          Image(image: AssetImage("images/blood.png")),
-                          SizedBox(width: 20,),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Create a Request",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color:  Color(0xFFB32525)),),
-                              SizedBox(height: 10,),
-                              Container(
-                                width: MediaQuery.of(context).size.width/1.75,
-                                child: Text(
-                                  "You can create request if you need blood,medicines etc. urgently",
-                                  style: TextStyle(color: Color(0xFFFF5E5E)),
-
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text("Or"),
-                  ),
-                  Container(
-                    // height: MediaQuery.of(context).size.height / 3,
-                    // width: MediaQuery.of(context).size.width / 2,
-                    decoration: BoxDecoration(
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateRequest()));
+                    },
+                    child: Container(
+                      // height: MediaQuery.of(context).size.height / 3,
+                      // width: MediaQuery.of(context).size.width / 2,
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         color: Color(0xFFFBEAEA),
                         border: Border.all(color: Color(0xFFFF5E5E))
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 30),
-                      child: Row(
-                        children: [
-                          Image(image: AssetImage("images/money.png")),
-                          SizedBox(width: 20,),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Fund Raising",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color:  Color(0xFFB32525)),),
-                              SizedBox(height: 10,),
-                              Container(
-                                width: MediaQuery.of(context).size.width/1.75,
-                                child: Text(
-                                  "You can raise funds for the people in need",
-                                  style: TextStyle(color: Color(0xFFFF5E5E)),
-
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
                       ),
-                    ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 30),
+                        child: Row(
+                          children: [
+                            Image(image: AssetImage("images/blood.png")),
+                            SizedBox(width: 20,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Create a Request",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color:  Color(0xFFB32525)),),
+                                SizedBox(height: 10,),
+                                Container(
+                                  width: MediaQuery.of(context).size.width/1.75,
+                                  child: Text(
+                                    "You can create request if you need blood,medicines etc. urgently",
+                                    style: TextStyle(color: Color(0xFFFF5E5E)),
 
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  GestureDetector(
+                    onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>FundRaising()));
+                    },
+                    child: Container(
+                      // height: MediaQuery.of(context).size.height / 3,
+                      // width: MediaQuery.of(context).size.width / 2,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Color(0xFFFBEAEA),
+                          border: Border.all(color: Color(0xFFFF5E5E))
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 40,horizontal: 30),
+                        child: Row(
+                          children: [
+                            Image(image: AssetImage("images/money.png")),
+                            SizedBox(width: 20,),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Fund Raising",style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600,color:  Color(0xFFB32525)),),
+                                SizedBox(height: 10,),
+                                Container(
+                                  width: MediaQuery.of(context).size.width/1.75,
+                                  child: Text(
+                                    "You can raise funds for the people in need",
+                                    style: TextStyle(color: Color(0xFFFF5E5E)),
+
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+
+                    ),
                   ),
                 ],
               ),

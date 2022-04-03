@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'my_card.dart';
-
+import 'my_card2.dart';
 
 class Category extends StatefulWidget {
   Category({required this.name, required this.data});
@@ -32,7 +32,7 @@ class _CategoryState extends State<Category> {
             child: ListView.builder(
               itemCount: widget.data.length,
               itemBuilder: (BuildContext context,int index){
-                return MyCard(data: widget.data[index],show: 1,);
+                return (widget.name=="Fund Raising") ? MyFCard(data: widget.data[index],show: 1,) : MyCard(data: widget.data[index],show: 1,);
               },
               scrollDirection: Axis.horizontal,
 
